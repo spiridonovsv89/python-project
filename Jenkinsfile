@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-
+    DOCKERHUB = credentials('dockerhub')
     }
     stages {
         stage('Checkout') {
