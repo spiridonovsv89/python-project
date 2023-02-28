@@ -1,9 +1,27 @@
 pipeline {
     agent any
+    enviroment {
+
+    }
     stages {
-        stage('Example') {
+        stage('Checkout') {
+   	 	    steps {
+   		 	    checkout scm
+   	 	    }
+    	}
+        stage('Build') {
             steps {
-                echo 'Hello World'
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
