@@ -1,29 +1,30 @@
 pipeline {
-    agent any
-
-    environment {
-    DOCKERHUB = credentials('dockerhub')
+  environment {
+    registry = "spiridonovsv89/python-project"
+    registryCredential = 'dockerhub'
+  }
+  agent any
+  stages {
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
     }
-    stages {
-        stage('Checkout') {
-   	 	    steps {
-   		 	    checkout scm
-   	 	    }
-    	}
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
+    stage('Deploy Image') {
+      steps{
+         script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
     }
 }
