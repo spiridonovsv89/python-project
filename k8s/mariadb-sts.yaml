@@ -3,7 +3,8 @@ kind: StatefulSet
 metadata:
   name: mariadb-sts
 spec:
-  replicas: 2
+  serviceName: "mariadb-svc"
+  replicas: 1
   selector:
     matchLabels:
       app: mariadb
