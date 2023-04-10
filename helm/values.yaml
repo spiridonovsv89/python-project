@@ -1,0 +1,6 @@
+controller:
+  installPlugins:
+   - google-kubernetes-engine:latest
+   - docker-workflow:latest
+   - kubernetes:latest
+   - git:latest
