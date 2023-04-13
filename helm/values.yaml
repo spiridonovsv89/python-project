@@ -4,3 +4,4 @@ controller:
    - docker-workflow:latest
    - kubernetes:latest
    - git:latest
+   - github:latest
