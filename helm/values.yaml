@@ -5,3 +5,10 @@ controller:
    - kubernetes:latest
    - git:latest
    - github:latest
+  secondaryingress:
+   enabled: true
+   apiVersion: networking.k8s.io/v1
+   paths:
+    - /github-webhook
+   annotations:
+    kubernetes.io/ingress.class: nginx
