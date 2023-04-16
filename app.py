@@ -3,12 +3,12 @@ import mariadb, os
 
 app = Flask(__name__)
 
-conn = mariadb.connect(
-         host = os.getenv('MARIADB_ROOT_HOST'),
-         port = 3306,
-         user = 'root',
-         password = os.getenv('MARIADB_ROOT_PASSWORD'),
-         database= os.getenv('MARIADB_DATABASE'))
+ conn = mariadb.connect(
+          host = os.getenv('MARIADB_ROOT_HOST'),
+          port = 3306,
+          user = 'root',
+          password = os.getenv('MARIADB_ROOT_PASSWORD'),
+          database= os.getenv('MARIADB_DATABASE'))
 
 @app.route("/")
 @app.route("/index")
@@ -56,4 +56,4 @@ def magazines():
     return render_template('index.html', data=data, headers=headers, title='magazines')
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True, port=5000, host='0.0.0.0')
